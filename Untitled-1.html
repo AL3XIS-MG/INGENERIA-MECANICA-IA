@@ -1,62 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Web con IA</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Bienvenido a Mi Página Web</h1>
-    <p>Aquí puedes interactuar con mi IA.</p>
+    <header>
+        <h1>Bienvenido a Mi Página Web</h1>
+    </header>
+    <main>
+        <p>Aquí puedes interactuar con mi IA.</p>
+        <!-- Formulario de ejemplo -->
+        <form id="input-form">
+            <label for="user-input">Introduce una pregunta:</label>
+            <input type="text" id="user-input" name="user-input">
+            <button type="button" onclick="procesarPregunta()">Enviar</button>
+        </form>
+        <div id="response"></div>
+    </main>
+    <footer>
+        <p>© 2024 Mi Página Web con IA</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
-<link rel="stylesheet" href="styles.css">
-<script src="script.js"></script>
-
-
-% Paso 1: Cargar y Preparar los Datos
-
-% Supongamos que tienes un conjunto de datos de flujo en un tubo (X) y la presión correspondiente (Y)
-% Aquí utilizaremos datos de ejemplo para ilustrar el proceso
-
-% Generar datos de entrenamiento
-X_train = linspace(0.1, 0.8, 100)'; % Datos de flujo en m^3/s (100 puntos)
-Y_train = 100 + 500*X_train - 1000*X_train.^2 + 800*X_train.^3 + randn(100,1)*100; % Datos de presión en Pa (con ruido)
-
-% Mostrar los primeros 5 puntos de datos como ejemplo
-disp('Primeros 5 puntos de datos de entrenamiento:');
-disp([X_train(1:5), Y_train(1:5)]);
-
-% Mostrar la cantidad total de datos de entrenamiento
-disp(['Cantidad total de datos de entrenamiento: ', num2str(length(X_train))]);
-% Supongamos que tienes un conjunto de datos de flujo en un tubo (X) y la presión correspondiente (Y)
-
-% Ejemplo de datos (X: flujo en m^3/s, Y: presión en Pa)
-X = [0.1, 0.2, 0.3, 0.4, 0.5]; % Datos de flujo en m^3/s
-Y = [100, 150, 200, 250, 300]; % Datos de presión en Pa
-
-% Paso 2: Definir y Entrenar el Modelo
-% En este caso, utilizaremos un modelo de regresión lineal simple
-
-% Crear el modelo de regresión lineal
-modelo = fitlm(X, Y);
-
-% Paso 3: Hacer Predicciones
-% Utilizar el modelo entrenado para hacer predicciones en nuevos datos
-
-% Generar datos de prueba para el flujo en el tubo
-X_prueba = linspace(0, 0.6, 100); % Genera 100 puntos de flujo de 0 a 0.6 m^3/s
-
-% Hacer predicciones de presión utilizando el modelo
-Y_prediccion = predict(modelo, X_prueba');
-
-% Paso 4: Visualizar los Resultados
-% Visualizar los datos originales y las predicciones del modelo
-
-figure; % Crea una nueva figura para el gráfico
-plot(X, Y, 'o', X_prueba, Y_prediccion, '--');
-xlabel('Flujo en Tubo (m^3/s)');
-ylabel('Presión (Pa)');
-legend('Datos Originales', 'Predicciones del Modelo');
-title('Modelo de Regresión Lineal para Flujo en Tubo y Presión');
-
-% Mostrar el coeficiente de determinación (R-cuadrado) del modelo
-disp(['Coeficiente de determinación (R^2): ', num2str(modelo.Rsquared.Ordinary)]);
